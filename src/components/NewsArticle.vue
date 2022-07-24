@@ -1,5 +1,5 @@
 <template>
-  <li>
+  <li v-if="notDeleted">
     <h2>
       <a href="{{ article.href }}">
         {{ article.header }}
@@ -21,7 +21,7 @@
       {{ article.text }}
     </span>
     </div>
-
+    <button @click="deleteArticle">Удалить</button>
   </li>
 </template>
 
@@ -39,7 +39,8 @@ export default {
       options: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
       isUp: false,
       isDown: false,
-      selected: this.article.rating
+      selected: this.article.rating,
+      notDeleted: true
     }
   },
   methods: {
@@ -51,6 +52,9 @@ export default {
         this.isUp = false;
         this.isDown = true;
       }
+    },
+    deleteArticle() {
+      this.notDeleted = false;
     }
   }
 }

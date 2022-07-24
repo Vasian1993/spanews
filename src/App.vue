@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <h1>Новости</h1>
-    <NewsList v-bind:listData="listData"/>
+    <NewsList v-bind:listData="articles"/>
   </div>
 </template>
 
@@ -17,7 +17,7 @@ export default {
   },
   data() {
     return {
-      listData: [
+      articles: [
         {header: "Новость 1", href: "some_href_1", image: "some_image", text: "text about something", rating: "5"},
         {header: "Новость 2", href: "some_href_2", image: "", text: "text about something", rating: "7"},
         {header: "Новость 3", href: "some_href_3", image: "some_image", text: "text about something", rating: "9"},
