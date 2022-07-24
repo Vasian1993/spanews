@@ -30,52 +30,53 @@
 
 <script>
 import NewsArticle from "@/components/NewsArticle";
+
 export default {
   name: "NewsList",
   components: {NewsArticle},
-  data(){
+  data() {
     return {
       pageNumber: 0,
       actualSize: this.size
     }
   },
-  props:{
+  props: {
     listData: {
-      type:Array,
-      required:true
+      type: Array,
+      required: true
     },
-    size:{
-      type:Number,
-      required:false,
+    size: {
+      type: Number,
+      required: false,
       default: 6
     }
   },
-  created () {
+  created() {
     window.addEventListener('scroll', this.handleScroll);
   },
-  unmounted () {
+  unmounted() {
     window.removeEventListener('scroll', this.handleScroll);
   },
-  methods:{
-    nextPage(){
+  methods: {
+    nextPage() {
       this.pageNumber++;
     },
-    prevPage(){
+    prevPage() {
       this.pageNumber--;
     },
-    handleScroll () {
+    handleScroll() {
 
-      if((window.innerHeight + window.pageYOffset) >= document.body.offsetHeight && !(this.pageNumber >= this.pageCount -1)){
+      if ((window.innerHeight + window.pageYOffset) >= document.body.offsetHeight && !(this.pageNumber >= this.pageCount - 1)) {
         this.nextPage();
-        window.scrollTo(0,10);
+        window.scrollTo(0, 10);
       }
-      if(window.innerHeight == window.innerHeight + window.pageYOffset && !(this.pageNumber === 0)) {
+      if (window.innerHeight == window.innerHeight + window.pageYOffset && !(this.pageNumber === 0)) {
         this.prevPage();
       }
       console.log('scroll', window.innerHeight + window.pageYOffset);
       console.log('document.body.offsetHeight', document.body.offsetHeight);
     },
-    changePaginationSize(paginationSize){
+    changePaginationSize(paginationSize) {
       this.pageNumber = 0;
       this.actualSize = paginationSize;
       this.paginatedData();
@@ -97,19 +98,21 @@ export default {
 </script>
 
 <style scoped>
-  ul{
-    list-style: none;
-  }
-  button{
-    width:100px;
-    height:40px;
-    background-color:#eef;
-  }
+ul {
+  list-style: none;
+}
 
-  button:hover{
-    cursor:pointer;
-  }
-  button:hover:disabled{
-    cursor:not-allowed;
-  }
+button {
+  width: 100px;
+  height: 40px;
+  background-color: #eef;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+button:hover:disabled {
+  cursor: not-allowed;
+}
 </style>
