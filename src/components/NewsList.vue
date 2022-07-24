@@ -18,14 +18,11 @@
       Next
     </button>
     <div>
-      <button @click="changePaginationSize3">
+      <button @click="changePaginationSize(3)">
         3
       </button>
-      <button @click="changePaginationSize6">
+      <button @click="changePaginationSize(6)">
         6
-      </button>
-      <button @click="changePaginationSize9">
-        9
       </button>
     </div>
   </div>
@@ -38,7 +35,8 @@ export default {
   components: {NewsArticle},
   data(){
     return {
-      pageNumber: 0
+      pageNumber: 0,
+      actualSize: this.size
     }
   },
   props:{
@@ -76,17 +74,22 @@ export default {
       }
       console.log('scroll', window.innerHeight + window.pageYOffset);
       console.log('document.body.offsetHeight', document.body.offsetHeight);
+    },
+    changePaginationSize(paginationSize){
+      this.pageNumber = 0;
+      this.actualSize = paginationSize;
+      this.paginatedData();
     }
   },
   computed: {
     pageCount() {
       let l = this.listData.length,
-          s = this.size;
+          s = this.actualSize;
       return Math.ceil(l / s);
     },
     paginatedData() {
-      const start = this.pageNumber * this.size,
-          end = start + this.size;
+      const start = this.pageNumber * this.actualSize,
+          end = start + this.actualSize;
       return this.listData.slice(start, end);
     }
   },
